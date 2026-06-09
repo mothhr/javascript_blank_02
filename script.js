@@ -1,34 +1,43 @@
 // JavaScript
 console.log('Hello world!');
 
-// body の背景色を変える
-const btnSample01 = document.querySelector('.sample01');
-btnSample01.addEventListener('click', () => {
-  const obj = document.body;
-  obj.style.backgroundColor = 'teal';
+//5-1｜繰り返し
+const btnRed = document.querySelector('.btn-red');
+const btnGreen = document.querySelector('.btn-green');
+const btnBlue = document.querySelector('.btn-blue');
+
+btnRed.addEventListener('click', () => {
+  document.body.style.backgroundColor = 'red';
+});
+btnGreen.addEventListener('click', () => {
+  document.body.style.backgroundColor = 'green';
+});
+btnBlue.addEventListener('click', () => {
+  document.body.style.backgroundColor = 'blue';
 });
 
-// ID要素 の背景色を変える
-const btnSample02 = document.querySelector('.sample02');
-btnSample02.addEventListener('click', () => {
-  const obj = document.querySelector('#id01');
-  obj.style.backgroundColor = 'hotpink';
+// 5-2｜引数
+function changeBgColor(color) {
+  document.body.style.backgroundColor = color;
+}
+
+const btnArgs = document.querySelectorAll('.btn-arg');
+btnArgs.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const color = btn.getAttribute('data-color');
+    changeBgColor(color); // 引数として渡す
+  });
 });
 
-// CLASS要素 の背景色を変える
-const btnSample03 = document.querySelector('.sample03');
-btnSample03.addEventListener('click', () => {
-  const lines = document.querySelectorAll('.class01');
-  for (let i = 0; i < lines.length; i++) {
-    lines[i].style.backgroundColor = 'lightyellow';
-  }
-});
+// ６｜汎用性のある関数
+// ランダムな16進6桁のカラーコードを生成
+function randomColor() {
+  const col = Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0');
+  return '#' + col;
+}
 
-// HTML要素 の背景色を変える
-const btnSample04 = document.querySelector('.sample04');
-btnSample04.addEventListener('click', () => {
-  const obj = document.querySelectorAll('p');
-  for (let i = 0; i < obj.length; i++) {
-    obj[i].style.backgroundColor = 'blue';
-  }
+// 関数の呼び出し
+const btnGeneric = document.querySelector('.btn-generic');
+btnGeneric.addEventListener('click', () => {
+  document.body.style.backgroundColor = randomColor();
 });
